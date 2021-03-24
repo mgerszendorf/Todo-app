@@ -1,0 +1,261 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-size: 10px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F1F4F6;
+}
+
+.App{
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    color: #6F89A0;
+}
+
+.welcome_txt h1, .time p{
+    font-size: 3rem;
+    margin: 2rem 0 1rem 0;
+    font-weight: normal;
+}
+
+.time p{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #53ADFD;
+    margin: 0;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0 0 0;
+}
+
+/* CHECKBOX */
+
+.add_task {
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid #6F89A0;
+    outline: none;
+    color: #6F89A0;
+}
+
+.add_task:focus{
+    border: 2px solid #53ADFD;
+}
+
+.add_task::-webkit-input-placeholder {
+    color: #6F89A0;
+  }
+
+.priority{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.priority input:focus{
+    outline: none;
+}
+
+.priority label{
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+#important{
+    width: 2rem;
+    height: 2rem;
+}
+
+/* CALENDER */
+
+.date{
+    font-size: 2rem;
+    color: #6F89A0;
+    border-radius: 8px;
+    border: 2px solid #6F89A0;
+    padding: .7rem;
+}
+
+.date:focus{
+    outline: none;
+    border: 2px solid #53ADFD;
+}
+
+.add_btn{
+    background-color: #FF485C;
+    border: none;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 2rem;
+    padding: 1rem;
+    margin: 2rem 0;
+    cursor: pointer;
+}
+
+.add_btn:focus{
+    outline: none;
+}
+
+.add_btn:active{
+    background-color: #ff253e;
+    outline: none;
+}
+
+/* TASK LIST - ACTIVE */
+
+.active{
+    background-color: #53ADFD;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.active p{
+    font-size: 2rem;
+    background-color: transparent;
+    color: #fff;
+}
+
+.active p:nth-child(1){
+    font-weight: 700;
+}
+
+.active_task{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    color: #fff;
+    padding: 1.5rem 0 0 0;
+}
+
+.active_task span{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: transparent;
+    font-size: 1.6rem;
+}
+
+.active_buttons{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    margin: 1rem 0;
+}
+
+.active_buttons div{
+    background-color: #FF485C;
+    margin-right: 1rem;
+    font-size: 1.6rem;
+    padding: .5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.active_buttons div:active{
+    background-color: #ff253e;
+}
+
+.active_date{
+    font-weight: 700;
+    margin: 0 1.5rem;
+}
+
+/* TASK LIST - DONE */
+
+.done{
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+.done p{
+    font-size: 2rem;
+    background-color: transparent;
+    color: #6F89A0;
+    align-items: center;
+}
+
+.done p:nth-child(1){
+    font-weight: 700;
+}
+
+.done_task p{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    text-align: center;
+    padding: 1.5rem 0 0 0;
+}
+
+.done_task p span{
+    font-size: 1.6rem;
+    font-weight: normal;
+    background-color: transparent;
+}
+
+.done_task p span:nth-child(1){
+    font-weight: bold;
+}
+
+.done_btn{
+    background-color: #FF485C;
+    font-size: 1.6rem;
+    padding: .5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: normal;
+    margin: 1rem auto;
+}
+
+.done_btn:active{
+    background-color: #ff253e;
+}
+
+@media all and (min-width: 1024px){
+    .add_btn p{
+        margin: 3rem 0 4rem 0;
+    }
+
+    .active{
+        padding: 2rem;
+    }
+
+    .done{
+        padding: 2rem;
+    }
+
+    .active_buttons div{
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+    }
+
+    .done_btn{
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+    }
+
+    .active_task, .active_task span, .done_task p{
+        flex-direction: row;
+    }
+
+    .active_date, .finish_date{
+        margin: 0 5rem;
+    }
+    
+    .done_btn{
+        margin-left: 0;
+    }
+}
