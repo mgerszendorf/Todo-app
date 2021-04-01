@@ -2,7 +2,7 @@ An application designed to better organize your time.
 It allows you to set the priority of tasks and counts already completed. 
 Adds a due date for the task.
 
-Live: https://mgerszendorf.github.io/Todo app/
+Live: https://mgerszendorf.github.io/Todo-app/
 
 
 # Getting Started with Create React App
