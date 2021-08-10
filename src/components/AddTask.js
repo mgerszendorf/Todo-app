@@ -1,10 +1,18 @@
 import React, { Component } from "react";
+import Axios from "axios";
 
 class AddTask extends Component {
   state = {
     text: "",
     checked: false,
     date: new Date().toISOString().slice(0, 10),
+  };
+
+  addToList = () => {
+    Axios.post("http://localhost:3001/insert", {
+      taskName: this.state.text,
+      priority: this.state.checked,
+    });
   };
 
   handleText = (e) => {
@@ -75,7 +83,13 @@ class AddTask extends Component {
           onChange={this.handleDate}
         />
 
-        <button className="add_btn" onClick={this.handleClick}>
+        <button
+          className="add_btn"
+          onClick={() => {
+            this.handleClick();
+            this.addToList();
+          }}
+        >
           Add
         </button>
       </form>
