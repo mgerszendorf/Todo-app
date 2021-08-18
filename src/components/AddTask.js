@@ -14,11 +14,11 @@ class AddTask extends Component {
   };
 
   deleteDB = (id) => {
-    Axios.delete(`https://app-todoapp.herokuapp.com//delete/${id}`);
+    Axios.delete(`https://app-todoapp.herokuapp.com/delete/${id}`);
   };
 
   updateActive = (id) => {
-    Axios.put(`https://app-todoapp.herokuapp.com//update`, {
+    Axios.put(`https://app-todoapp.herokuapp.com/update`, {
       id: id,
       newActive: this.state.newActive,
       newFinishDate: this.state.newFinishDate,
@@ -59,7 +59,7 @@ class AddTask extends Component {
       text: this.state.text,
     };
 
-    await Axios.post(`https://app-todoapp.herokuapp.com//insert`, { todo });
+    await Axios.post(`https://app-todoapp.herokuapp.com/insert`, { todo });
   };
 
   render() {

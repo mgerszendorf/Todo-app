@@ -11,7 +11,7 @@ class App extends Component {
 
   componentDidMount() {
     let currentComponent = this;
-    Axios.get("http://localhost:3001/read")
+    Axios.get("https://app-todoapp.herokuapp.com/read")
       .then((response) => {
         this.setState(response.data);
 
