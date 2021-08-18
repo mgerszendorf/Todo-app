@@ -1,23 +1,28 @@
 import React, { Component } from "react";
 import AddTask from "./AddTask";
-import TaskList from "./TaskList";
 import Clock from "./Clock";
 import "./App.css";
+import Axios from "axios";
 
 class App extends Component {
-  counter = 9;
   state = {
     tasks: [],
   };
 
-  deleteTask = (id) => {
-    let tasks = [...this.state.tasks];
-    const index = tasks.findIndex((task) => task.id === id);
-    tasks.splice(index, 1);
-    this.setState({
-      tasks,
-    });
-  };
+  componentDidMount() {
+    let currentComponent = this;
+    Axios.get("http://localhost:3001/read")
+      .then((response) => {
+        this.setState(response.data);
+
+        currentComponent.setState({
+          tasks: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   changeTaskStatus = (id) => {
     const tasks = [...this.state.tasks];
@@ -32,34 +37,11 @@ class App extends Component {
     });
   };
 
-  addTask = (text, date, important) => {
-    const task = {
-      id: this.counter,
-      text,
-      date,
-      important,
-      active: true,
-      finishDate: null,
-    };
-    this.counter++;
-
-    this.setState((prevState) => ({
-      tasks: [...prevState.tasks, task],
-    }));
-
-    return true;
-  };
-
   render() {
     return (
       <div className="App">
         <Clock />
-        <AddTask add={this.addTask} />
-        <TaskList
-          tasks={this.state.tasks}
-          delete={this.deleteTask}
-          change={this.changeTaskStatus}
-        />
+        <AddTask tasks={this.state.tasks} />
       </div>
     );
   }

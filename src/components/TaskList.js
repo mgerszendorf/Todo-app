@@ -27,18 +27,15 @@ const TaskList = (props) => {
     <Task
       key={task.id}
       task={task}
-      delete={props.delete}
-      change={props.change}
+      _id={task._id}
+      updateActive={props.updateActive}
+      deleteDB={props.deleteDB}
     />
   ));
   const doneTasks = done.map((task) => (
-    <Task
-      key={task.id}
-      task={task}
-      delete={props.delete}
-      change={props.change}
-    />
+    <Task key={task.id} task={task} _id={task._id} deleteDB={props.deleteDB} />
   ));
+
   return (
     <>
       <div className="active">
