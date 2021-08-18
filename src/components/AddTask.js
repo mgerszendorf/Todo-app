@@ -1,18 +1,35 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import TaskList from "./TaskList";
 
 class AddTask extends Component {
   state = {
     text: "",
     checked: false,
     date: new Date().toISOString().slice(0, 10),
+    active: true,
+    newActive: false,
+    finishDate: "",
+    newFinishDate: new Date().toISOString().slice(0, 10),
   };
 
-  addToList = () => {
-    Axios.post("http://localhost:3001/insert", {
-      taskName: this.state.text,
-      priority: this.state.checked,
+  deleteDB = (id) => {
+    Axios.delete(`https://app-todoapp.herokuapp.com//delete/${id}`);
+  };
+
+  updateActive = (id) => {
+    Axios.put(`https://app-todoapp.herokuapp.com//update`, {
+      id: id,
+      newActive: this.state.newActive,
+      newFinishDate: this.state.newFinishDate,
     });
+  };
+
+  handleClick = () => {
+    const { text, date, checked } = this.state;
+    if (text.length > 2) {
+      this.props.add(text, date, checked);
+    }
   };
 
   handleText = (e) => {
@@ -33,66 +50,62 @@ class AddTask extends Component {
     });
   };
 
-  handleClick = () => {
-    const { text, date, checked } = this.state;
-    if (text.length > 2) {
-      const add = this.props.add(text, date, checked);
-      if (add) {
-        this.setState({
-          text: "",
-          checked: false,
-          date: new Date().toISOString().slice(0, 10),
-        });
-      }
-    } else {
-      alert("Please enter a task longer than 2 characters");
-    }
-  };
+  onFormSubmit = async (event) => {
+    const todo = {
+      active: this.state.active,
+      date: this.state.date,
+      finishDate: this.state.finishDate,
+      important: this.state.checked,
+      text: this.state.text,
+    };
 
-  onFormSubmit = (e) => {
-    e.preventDefault();
+    await Axios.post(`https://app-todoapp.herokuapp.com//insert`, { todo });
   };
 
   render() {
     return (
-      <form className="form" onSubmit={this.onFormSubmit}>
-        <input
-          className="add_task"
-          type="text"
-          placeholder="Add task..."
-          onFocus={(e) => (e.target.placeholder = "")}
-          onBlur={(e) => (e.target.placeholder = "Add task...")}
-          value={this.state.text}
-          onChange={this.handleText}
-        />
-
-        <div className="priority">
+      <div>
+        <form className="form" onSubmit={this.onFormSubmit}>
           <input
-            id="important"
-            type="checkbox"
-            checked={this.state.checked}
-            onChange={this.handleCheckbox}
+            className="add_task"
+            type="text"
+            name="text"
+            placeholder="Add task..."
+            onFocus={(e) => (e.target.placeholder = "")}
+            onBlur={(e) => (e.target.placeholder = "Add task...")}
+            onChange={this.handleText}
           />
-          <label htmlFor="important">Important</label>
-        </div>
 
-        <input
-          className="date"
-          type="date"
-          value={this.state.date}
-          onChange={this.handleDate}
+          <div className="priority">
+            <input
+              id="important"
+              type="checkbox"
+              checked={this.state.checked}
+              onChange={this.handleCheckbox}
+            />
+            <label htmlFor="important">Important</label>
+          </div>
+
+          <input
+            className="date"
+            type="date"
+            value={this.state.date}
+            onChange={this.handleDate}
+          />
+
+          <button className="add_btn" onClick={this.handleClick}>
+            Add
+          </button>
+        </form>
+        <TaskList
+          tasks={this.props.tasks}
+          delete={this.props.delete}
+          change={this.props.change}
+          updateActive={this.updateActive}
+          deleteDB={this.deleteDB}
+          myId={this.props.myId}
         />
-
-        <button
-          className="add_btn"
-          onClick={() => {
-            this.handleClick();
-            this.addToList();
-          }}
-        >
-          Add
-        </button>
-      </form>
+      </div>
     );
   }
 }
